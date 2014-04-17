@@ -1,0 +1,43 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000310}}
+table#dynamic {
+  table-layout: fixed;
+  border-width: 0 0 1px 1px;
+  border-color: #cccccc;
+  border-style: solid; }
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000316}}
+  table#dynamic td, table#dynamic th {
+    border-width: 1px 1px 0 0;
+    border-color: #cccccc;
+    border-style: solid;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    vertical-align: bottom;
+    width: 100px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000329}}
+  table#dynamic th {
+    font-style: normal;
+    font-weight: normal;
+    background: #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000335}}
+  table#dynamic td.first {
+    width: 50px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000340}}
+div.dx {
+  float: right;
+  width: 5px;
+  height: 30px;
+  cursor: w-resize;
+  background: #dedede; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000348}}
+div.dx:hover, div.dy:hover {
+  background: #99cc00; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-work\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000352}}
+div.dy {
+  width: 100%;
+  height: 5px;
+  cursor: n-resize;
+  background: #dedede; }
