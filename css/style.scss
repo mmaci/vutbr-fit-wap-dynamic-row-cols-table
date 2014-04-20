@@ -41,7 +41,7 @@ div.dx {
     float: right;    
     width: 5px; 
     height: 30px; 
-    cursor: w-resize; 
+    cursor: col-resize; 
     background: $darker-gray;
 }
 
@@ -52,6 +52,6 @@ div.dx:hover, div.dy:hover {
 div.dy {        
     width: 100%;
     height: 5px;
-    cursor: n-resize;  
+    cursor: row-resize;  
     background: $darker-gray;
 }
