@@ -159,11 +159,11 @@ function mouseMove(event) {
  * @param {type} event
  * @returns {Boolean}
  */
-function mouseDown(event) {    
+function mouseDown(event) {
     var target = event.target || event.srcElement;
-        
+
     if (target.tagName === "TH" && target.parentNode.rowIndex === 0 && target.cellIndex !== 0) {
-        isMouseDown = true;        
+        isMouseDown = true;
         setDragObject(target);
     }
 
@@ -232,8 +232,8 @@ function swapColumns(table, cellIndex1, cellIndex2) {
 function mouseUpTable(event) {
     isResizeTableY = false;
     isResizeTableX = false;
-    
-    document.onmousemove = mouseMove; 
+
+    document.onmousemove = mouseMove;
     document.onmouseup = mouseUp;
 }
 
@@ -243,19 +243,19 @@ function mouseUpTable(event) {
  * @returns {undefined}
  */
 function mouseDownTableVertical(event) {
-        var target = event.target || event.srcElement;
-    
+    var target = event.target || event.srcElement;
+
     isResizeTableY = true;
-    
-    mouseCoords = getMouseCoords(event);    
+
+    mouseCoords = getMouseCoords(event);
     sliderCoord = event.target.parentNode.parentNode.rowIndex;
-    
+
     startY = mouseCoords.y;
     origHeight = table.rows[sliderCoord].cells[0].clientHeight;
 
     document.onmousemove = mouseMoveTableVertical;
     document.onmouseup = mouseUpTable;
- }
+}
 
 
 /**
@@ -266,7 +266,7 @@ function mouseDownTableVertical(event) {
 function mouseMoveTableVertical(event) {
     if (isResizeTableY) {
         mouseCoords = getMouseCoords(event);
-        moveY = mouseCoords.y - startY;        
+        moveY = mouseCoords.y - startY;
         var newHeight = moveY + origHeight;
 
         for (var i = 0; i < table.rows[sliderCoord].cells.length; ++i) {
@@ -286,12 +286,12 @@ function mouseMoveTableVertical(event) {
  */
 function mouseDownTableHorizontal(event) {
     isResizeTableX = true;
-    
+
     mouseCoords = getMouseCoords(event);
     sliderCoord = event.target.parentNode.cellIndex;
-    
+
     startX = mouseCoords.x;
-    
+
     origWidth = table.rows[0].cells[sliderCoord].clientWidth;
 
     document.onmousemove = mouseMoveTableHorizontal;
@@ -305,8 +305,8 @@ function mouseDownTableHorizontal(event) {
  * @returns {undefined}
  */
 function mouseMoveTableHorizontal(event) {
-    if (isResizeTableX) {        
-        mouseCoords = getMouseCoords(event);        
+    if (isResizeTableX) {
+        mouseCoords = getMouseCoords(event);
         moveX = mouseCoords.x - startX;
         var newWidth = moveX + origWidth;
 
@@ -329,7 +329,7 @@ document.onmousedown = mouseDown;
 for (var j = 0; j < table.rows.length; j++) { // rows
     var row = this.table.rows[j];
 
-    /* vertical sliders */    
+    /* vertical sliders */
     if (j !== 0) {
         row.cells[0].innerHTML = row.cells[0].innerHTML + "<div id='dy-" + j + "' class='dy'></div>";
         var dy = document.getElementById('dy-' + j);
