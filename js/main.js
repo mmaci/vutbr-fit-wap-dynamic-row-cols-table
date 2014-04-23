@@ -1,10 +1,23 @@
 
 var html = document.documentElement;
 var table = document.getElementById('dynamic');
+var body = document.body;
 
-var dragObject = null;
-var mouseOffset = null;
-var isMouseDown = null;
+var isMouseDown = false;
+var lastTarget = null;
+var currentTarget = null;
+var downTarget = null;
+
+var mouseCoords = null;
+var sliderCoord = null;
+var origHeight = null;
+var origWidth = null;
+var startX = null;
+var startY = null;
+var moveX = null;
+var moveY = null;
+var isResizeTableX = false;
+var isResizeTableY = false;
 
 /**
  * Returns current [x,y] coordinates of the mouse.
@@ -67,18 +80,32 @@ function setDragObject(object) {
     if (!object)
         return;
 
-    object.onmousedown = function(event) {
-        dragObject = this;
-        mouseOffset = getMouseOffset(this, event);
-        return false;
-    };
+    downTarget = object;
+    currentTarget = object;
+    em(object, '#ff0000');
 }
 
 
+/**
+ * Unsets all variables after releasing mouse click
+ * @returns {undefined}
+ */
+function unsetDragObject() {
+    clear(downTarget);
+    clear(lastTarget);
+
+    downTarget = null;
+    currentTarget = null;
+    lastTarget = null;
+}
 
 
-
-
+/**
+ * Emphasizes an object
+ * @param {type} target
+ * @param {type} color
+ * @returns {undefined}
+ */
 function em(target, color) {
     target.style.borderWidth = '3px';
     target.style.borderColor = color;
@@ -86,6 +113,12 @@ function em(target, color) {
     target.style.cursor = 'move';
 }
 
+
+/**
+ * Clears object emphesize
+ * @param {type} target
+ * @returns {undefined}
+ */
 function clear(target) {
     target.style.borderWidth = '1px 1px 0 0';
     target.style.borderColor = '#ccc';
@@ -93,15 +126,16 @@ function clear(target) {
     target.style.cursor = 'auto';
 }
 
-var lastTarget = null;
-var currentTarget = null;
-var downTarget = null;
-
+/**
+ * Fires while we move with mouse and hold down button
+ * @param {type} event
+ * @returns {Boolean}
+ */
 function mouseMove(event) {
 
     event = event || window.event;
     var target = event.target || event.srcElement;
-    if (isMouseDown) {
+    if (isMouseDown && target.tagName === "TH" && target.parentNode.rowIndex === 0 && target.cellIndex !== 0) {
 
         currentTarget = target;
 
@@ -119,17 +153,30 @@ function mouseMove(event) {
     return false;
 }
 
-function mouseDown(event) {
-    isMouseDown = true;
-    var target = event.target || event.srcElement;
 
-    downTarget = target;
-    em(downTarget, '#ff0000');
+/**
+ * Fired when we click mouse button
+ * @param {type} event
+ * @returns {Boolean}
+ */
+function mouseDown(event) {    
+    var target = event.target || event.srcElement;
+        
+    if (target.tagName === "TH" && target.parentNode.rowIndex === 0 && target.cellIndex !== 0) {
+        isMouseDown = true;        
+        setDragObject(target);
+    }
 
     return false;
 }
 
+/**
+ * Fired when we release mouse click
+ * @param {type} event
+ * @returns {undefined}
+ */
 function mouseUp(event) {
+    isMouseDown = false;
 
     rowIndex1 = currentTarget.parentNode.rowIndex;
     rowIndex2 = downTarget.parentNode.rowIndex;
@@ -139,19 +186,18 @@ function mouseUp(event) {
     if (currentTarget !== downTarget && rowIndex1 === 0 && rowIndex2 === 0) {
         swapColumns(table, currentTarget.cellIndex, downTarget.cellIndex);
     }
-    clear(downTarget);
-    clear(lastTarget);
 
-    currentTarget = null;
-    downTarget = null;
-    isMouseDown = false;
+    unsetDragObject();
 }
 
-document.onmousedown = mouseDown;
-document.onmouseup = mouseUp;
-document.onmousemove = mouseMove;
-
-function swapColumns(table, cellIndex1, cellIndex2) {    
+/**
+ * Swaps table columns based on table 
+ * @param {type} table
+ * @param {type} cellIndex1
+ * @param {type} cellIndex2
+ * @returns {Boolean}
+ */
+function swapColumns(table, cellIndex1, cellIndex2) {
 
     if (table && (cellIndex1 !== cellIndex2)) {
 
@@ -173,101 +219,132 @@ function swapColumns(table, cellIndex1, cellIndex2) {
                 row.appendChild(leftCell);
             }
         }
-
     }
 
     return false;
 }
 
-/*
- var html = document.documentElement;
- var body = document.body;
- var table = document.getElementById('dynamic');
- 
- 
- 
- for (var a = 0; a < table.rows[0].cells.length; ++a) {
- var cell = table.rows[0].cells[a];
- 
- cell.onmousedown = function(event) {
- var mouse = mouseCoords(event);
- var startX = mouse.x;
- document.onmousemove = function(event) {
- var mouse = mouseCoords(event);
- var moveX = mouse.x - startX;
- 
- if (moveX > 10) {
- swapColumns(table, 2, 1);   
+/**
+ * Returns variables to original state after cell resize
+ * @param {type} event
+ * @returns {undefined}
+ */
+function mouseUpTable(event) {
+    isResizeTableY = false;
+    isResizeTableX = false;
+    
+    document.onmousemove = mouseMove; 
+    document.onmouseup = mouseUp;
+}
+
+/**
+ * Fired when grabbing a slider for resizing height
+ * @param {type} event
+ * @returns {undefined}
+ */
+function mouseDownTableVertical(event) {
+        var target = event.target || event.srcElement;
+    
+    isResizeTableY = true;
+    
+    mouseCoords = getMouseCoords(event);    
+    sliderCoord = event.target.parentNode.parentNode.rowIndex;
+    
+    startY = mouseCoords.y;
+    origHeight = table.rows[sliderCoord].cells[0].clientHeight;
+
+    document.onmousemove = mouseMoveTableVertical;
+    document.onmouseup = mouseUpTable;
  }
- 
- };
- };
- }
- 
- for (var j = 0; j < table.rows.length; j++) { // rows
- var row = this.table.rows[j];
- 
- 
- 
- // vertical sliders        
- if (j !== 0) {
- row.cells[0].innerHTML = row.cells[0].innerHTML + "<div id='dy-" + j + "' class='dy'></div>";
- var dy = document.getElementById('dy-' + j);
- 
- dy.onmousedown = function(event) {
- var startY = event.clientY + (html.scrollTop || (body && body.scrollTop) || 0) - (html.clientTop || 0);
- 
- var posY = this.id.split("-");
- posY = posY[1];
- 
- var originalHeight = table.rows[posY].cells[0].clientHeight;
- 
- document.onmousemove = function(event) {
- var mouseY = event.clientY + (html.scrollTop || (body && body.scrollTop) || 0) - (html.clientTop || 0);
- var moveY = mouseY - startY;
- var newHeight = moveY + originalHeight;
- 
- for (var i = 0; i < table.rows[posY].cells.length; ++i) {
- var cell = table.rows[posY].cells[i];
- cell.style.height = newHeight + 'px';
- }
- 
- table.rows[posY].cells[0].clientHeight = newHeight;
- };
- };
- }
- 
- 
- 
- // horizontal sliders
- for (var i = 0; i < row.cells.length; i++) { // columns        
- var cell = row.cells[i];
- 
- if (j === 0 && i !== 0) {
- cell.innerHTML = "<div id='dx-" + i + "' class='dx'></div>" + cell.innerHTML;
- var dx = document.getElementById('dx-' + i);
- 
- dx.onmousedown = function(event) {
- var startX = event.clientX + (html.scrollLeft || (body && body.scrollLeft) || 0) - (html.clientLeft || 0);
- 
- var posX = this.id.split("-");
- posX = posX[1];
- 
- var originalWidth = table.rows[0].cells[posX].clientWidth;
- 
- document.onmousemove = function(event) {
- var mouseX = event.clientX + (html.scrollLeft || (body && body.scrollLeft) || 0) - (html.clientLeft || 0);
- var moveX = mouseX - startX;
- var newWidth = moveX + originalWidth;
- 
- for (var j = 0; j < table.rows.length; ++j) {
- var cell = table.rows[j].cells[posX];
- cell.style.width = newWidth + 'px';
- }
- table.rows[0].cells[posX].clientWidth = newWidth;
- 
- };
- };
- }
- }
- }*/
+
+
+/**
+ * Fired when resizing the height while moving mouse
+ * @param {type} event
+ * @returns {undefined}
+ */
+function mouseMoveTableVertical(event) {
+    if (isResizeTableY) {
+        mouseCoords = getMouseCoords(event);
+        moveY = mouseCoords.y - startY;        
+        var newHeight = moveY + origHeight;
+
+        for (var i = 0; i < table.rows[sliderCoord].cells.length; ++i) {
+            var cell = table.rows[sliderCoord].cells[i];
+            cell.style.height = newHeight + 'px';
+        }
+
+        table.rows[sliderCoord].cells[0].clientHeight = newHeight;
+    }
+}
+
+
+/**
+ * Fired when grabbin slider for resizing width
+ * @param {type} event
+ * @returns {undefined}
+ */
+function mouseDownTableHorizontal(event) {
+    isResizeTableX = true;
+    
+    mouseCoords = getMouseCoords(event);
+    sliderCoord = event.target.parentNode.cellIndex;
+    
+    startX = mouseCoords.x;
+    
+    origWidth = table.rows[0].cells[sliderCoord].clientWidth;
+
+    document.onmousemove = mouseMoveTableHorizontal;
+    document.onmouseup = mouseUpTable;
+}
+
+
+/**
+ * Fired when resizing the width while moving mouse
+ * @param {type} event
+ * @returns {undefined}
+ */
+function mouseMoveTableHorizontal(event) {
+    if (isResizeTableX) {        
+        mouseCoords = getMouseCoords(event);        
+        moveX = mouseCoords.x - startX;
+        var newWidth = moveX + origWidth;
+
+        for (var j = 0; j < table.rows.length; ++j) {
+            var cell = table.rows[j].cells[sliderCoord];
+            cell.style.width = newWidth + 'px';
+        }
+        table.rows[0].cells[sliderCoord].clientWidth = newWidth;
+    }
+}
+
+/* set default mouse actions */
+document.onmousemove = mouseMove;
+document.onmouseup = mouseUp;
+document.onmousedown = mouseDown;
+
+
+/* set up sliders and their actions */
+
+for (var j = 0; j < table.rows.length; j++) { // rows
+    var row = this.table.rows[j];
+
+    /* vertical sliders */    
+    if (j !== 0) {
+        row.cells[0].innerHTML = row.cells[0].innerHTML + "<div id='dy-" + j + "' class='dy'></div>";
+        var dy = document.getElementById('dy-' + j);
+        dy.onmousedown = mouseDownTableVertical;
+    }
+
+    /* horizontal sliders */
+    for (var i = 0; i < row.cells.length; i++) { // columns        
+        var cell = row.cells[i];
+
+        if (j === 0 && i !== 0) {
+            cell.innerHTML = "<div id='dx-" + i + "' class='dx'></div>" + cell.innerHTML;
+            var dx = document.getElementById('dx-' + i);
+            dx.onmousedown = mouseDownTableHorizontal;
+        }
+    }
+}
+
