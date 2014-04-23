@@ -91,8 +91,10 @@ function setDragObject(object) {
  * @returns {undefined}
  */
 function unsetDragObject() {
-    clear(downTarget);
-    clear(lastTarget);
+    if (downTarget)
+        clear(downTarget);
+    if (lastTarget)
+        clear(lastTarget);
 
     downTarget = null;
     currentTarget = null;
@@ -177,11 +179,12 @@ function mouseDown(event) {
  */
 function mouseUp(event) {
     isMouseDown = false;
-
-    rowIndex1 = currentTarget.parentNode.rowIndex;
-    rowIndex2 = downTarget.parentNode.rowIndex;
-
     // down swap columns in case its not a table header
+
+    if (currentTarget)
+        rowIndex1 = currentTarget.parentNode.rowIndex;
+    if (downTarget)
+        rowIndex2 = downTarget.parentNode.rowIndex;
 
     if (currentTarget !== downTarget && rowIndex1 === 0 && rowIndex2 === 0) {
         swapColumns(table, currentTarget.cellIndex, downTarget.cellIndex);
