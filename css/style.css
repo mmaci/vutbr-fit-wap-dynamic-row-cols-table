@@ -1,11 +1,11 @@
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000310}}
-table#dynamic {
+table.dynamic {
   table-layout: fixed;
   border-width: 0 0 1px 1px;
   border-color: #cccccc;
   border-style: solid; }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000316}}
-  table#dynamic td, table#dynamic th {
+  table.dynamic td, table.dynamic th {
     border-width: 1px 1px 0 0;
     border-color: #cccccc;
     border-style: solid;
@@ -15,12 +15,12 @@ table#dynamic {
     vertical-align: bottom;
     width: 100px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000329}}
-  table#dynamic th {
+  table.dynamic th {
     font-style: normal;
     font-weight: normal;
     background: #eeeeee; }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000335}}
-  table#dynamic td.first {
+  table.dynamic td.first {
     width: 50px; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/dev\/htdocs\/vutbr-fit-wap-dynamic-row-cols-table\/css\/style\.scss}line{font-family:\0000340}}
