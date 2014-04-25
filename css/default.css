@@ -1,0 +1,63 @@
+
+table.default {
+    table-layout: fixed;
+    border-width: 0 0 1px 1px;
+    border-color: #aaaaaa;
+    border-style: solid;
+    font-family: "Open Sans", sans-serif;
+    font-size: 10pt;
+}
+
+/* all cells - both normal and header */
+table.default tr td, table.default tr th {
+    border-width: 1px 1px 0 0;
+    border-color: #aaaaaa;
+    border-style: solid;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    vertical-align: bottom;
+
+}
+
+/* horizontal slider */
+table.default tr td div.dx, table.default tr th div.dx {
+    float: right;
+    width: 5px;
+    height: 30px;
+    cursor: col-resize;
+    background: #cccccc; }
+
+
+/* vertical slider */
+table.default tr td div.dy, table.default tr th div.dy {
+    width: 100%;
+    height: 5px;
+    cursor: row-resize;
+    background: #cccccc; }
+
+/* vertical slider */
+table.default tr td div.dx:hover, table.default tr td div.dy:hover, table.default tr th div.dx:hover, table.default tr th div.dy:hover {
+    background: #99cc00; }
+table.default tr th {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11pt;
+    background: #dddddd; }
+
+/* every even row */
+table.default tr:nth-of-type(even) {
+    background-color: #eeeeee; }
+
+/* just colored text */
+span.red {
+    color: red; }
+
+span.green {
+    color: lime; }
+
+span.blue {
+    color: blue; }
+
+span.magenta {
+    color: magenta; }

@@ -1,0 +1,65 @@
+@import "variables";
+
+table.default {        
+    /* table */
+    table-layout: fixed;
+    border-width: 0 0 1px 1px;
+    border-color: $table-border-color;
+    border-style: solid;
+    font-family: $table-font-family;
+    font-size: $table-font-size;  
+
+    tr {
+        /* all cells - header and normal*/
+        td,th {            
+            border-width: 1px 1px 0 0;
+            border-color: $table-border-color;
+            border-style: solid;
+            width: 100px;
+
+            margin: 0;
+            padding: 0;
+            vertical-align: bottom;
+
+            /* horizontal slider */
+            div.dx {    
+                float: right;    
+                width: 5px; 
+                height: 30px; 
+                cursor: col-resize; 
+                background: $resize-slider-color;
+            }
+
+            div.dx:hover, div.dy:hover {
+                background: $resize-slider-hover;
+            }
+
+            /* vertical slider */
+            div.dy {        
+                width: 100%;
+                height: 5px;
+                cursor: row-resize;  
+                background: $resize-slider-color;
+            }
+        }
+
+        /* header cells */
+        th {
+            font-style: normal;
+            font-weight: bold;
+            font-size: $table-header-font-size;
+            background: $table-header-bg;
+        }
+    }
+
+    /* every even row */
+    tr:nth-of-type(even) {
+        background-color: $table-striped-bg;
+    }
+}
+
+/* just colored text */
+span.red { color: $red; }
+span.green { color: $green; }
+span.blue { color: $blue; }
+span.magenta { color: $magenta; }

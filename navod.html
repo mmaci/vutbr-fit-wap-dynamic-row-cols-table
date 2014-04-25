@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />        
+    </head>
+    <body>
+
+        <h1>Návod - Tabulka s dynamickými sloupci a řádky</h1>
+        <h3>Autor: Pavel Macenauer (xmacen02)</h3>
+
+        <h2>Instalace</h2>
+        <ol>
+            <li>Nakopírovat <em>dynamicTable.js</em> do složky s Javascript soubory a <em>default.css</em> do složky s CSS soubory.</li>
+            <li>Nalinkovat soubor ve Vámi používaném souboru těsně před koncem tagu body, např. takto:
+                <div class="code">
+                    <span class="gray">...</span><br>
+                    <strong>&lt;link rel="stylesheet" type="text/css" media="screen" href="css/default.css"&gt;</strong><br>
+                    &lt;/head&gt;<br>
+                    
+                    <span class="gray">...</span><br>
+                    <strong>&lt;script type="text/javascript" src="js/dynamicTable.js"&gt;&lt;/script&gt;</strong><br>
+                    &lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>                
+            </li>
+            <li>Vytvořit tabulku s parametry id a class, kde id je jedinečný identifikátor tabulky a pomocí class je dán její vzhled. V balíku je přiložen vzhled default, který lze použít jako obsah proměnné class. Následně ji inicializovat pomocí metody <em>dynamicTable.setTable(id)</em> dle jejího ID po načtení skriptu, např. takto:<br>
+                <div class="code">
+                    &lt;table id="<strong>myTable</strong>" class="<strong>default</strong>"&gt;<br>
+                    <span class="gray">...</span><br>
+                    &lt;/table&gt;<br>
+                    <span class="gray">...</span><br>
+                    &lt;script type="text/javascript" src="js/dynamicTable.js"&gt;&lt;/script&gt;<br>
+                    &lt;script type="text/javascript"&gt;<br>
+                    <strong>dynamicTable.setTable("myTable");</strong><br>
+                    &lt;/script&gt;<br>
+                    &lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+            </li>
+        </ol>
+        
+        <h2>Výchozí vzhled</h2>
+
+        <ul>            
+            <li>
+                Vzhled tabulky je nadefinován soubory ve složce <em>css</em>, konkrétně v souboru <em>default.css</em>, který je generovaný ze souborů <em>default.scss</em> a <em>_variables.scss</em> pomocí preprocessoru <a href="http://sass-lang.com/">SASS</a>. Pokuď <a href="http://sass-lang.com/">SASS</a> nepoužíváte lze editovat přímo <em>default.css</em>, nicméně je silně doporučeno měnit pouze obsah proměnných v souboru <em>_variables.scss</em> a překompilovat následně vygenerovaný <em>default.scss</em>, popř. pokuď máte dostatek odvahy, tak i samotný <em>default.scss</em>.
+            </li>
+        </ul>
+        
+        <h2>Co to umí?</h2>
+        <ul>
+            <li>Tažením za zvýrazněnou část v hlavičkových buňkách lze měnit šířku a výšku jednotlivých sloupců a řádku, kromě hlavičky.</li>
+            <li>Přetažením hlavičkových buněk lze prohazovat sloupce.</li>
+        </ul>
+        
+        <h3><a href="demo.html">DEMO</a></h3>
+        
+    </body>
+</html>

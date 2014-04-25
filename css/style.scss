@@ -1,57 +1,28 @@
-$gray: #eee;
-$dark-gray: #ccc;
-$darker-gray: #dedede;
-
-$red: #ff0000;
-$blue: #0000ff;
-
-$lime-green: #99cc00;
-
-table.dynamic {    
-    table-layout: fixed;
-    border-width: 0 0 1px 1px;
-    border-color: $dark-gray;
-    border-style: solid;
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
     
-    td,th {
-        border-width: 1px 1px 0 0;
-        border-color: $dark-gray;
-        border-style: solid;
-        width: 100px;
-        
-        margin: 0;
-        padding: 0;
-        vertical-align: bottom;
-        
-        width: 100px;
-    }
-    
-    th {
-        font-style: normal;
-        font-weight: normal;
-        background: $gray;
-    }
-    
-    td.first {
-        width: 50px;
+    div.code {    
+        background: #eee;
+        border: 1px #ddd solid;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
     }
 }
 
-div.dx {    
-    float: right;    
-    width: 5px; 
-    height: 30px; 
-    cursor: col-resize; 
-    background: $darker-gray;
+h3 {
+    color: #999;
 }
 
-div.dx:hover, div.dy:hover {
-    background: $lime-green;
+em {
+    background: #eee;
+    border-radius: 3px;
+    padding: 0 5px;
 }
 
-div.dy {        
-    width: 100%;
-    height: 5px;
-    cursor: row-resize;  
-    background: $darker-gray;
+span.gray {
+    color: #999;
+    font-style: italic;
 }

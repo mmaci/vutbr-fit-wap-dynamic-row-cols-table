@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+        
+        <!-- linked default style -->
+        <link rel="stylesheet" type="text/css" media="screen" href="css/default.css">        
+    </head>
+    <body>
+
+        <h1>Demo - Tabulka s dynamickými sloupci a řádky</h1>
+        <h3>Autor: Pavel Macenauer (xmacen02)</h3>
+
+        <h2>Klasická tabulka</h2>
+        <table id="d1" class="default" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>                    
+                    <th>4</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>A</th>
+                    <td><span class="red">A1</span></td>
+                    <td><span class="blue">A2</span></td>
+                    <td><span class="green">A3</span></td>
+                    <td><span class="magenta">A4</span></td>
+                </tr>
+
+                <tr>
+                    <th>B</th>
+                    <td><span class="red">B1</span></td>
+                    <td><span class="blue">B2</span></td>
+                    <td><span class="green">B3</span></td>
+                    <td><span class="magenta">B4</span></td>
+                </tr>
+
+                <tr>
+                    <th>C</th>
+                    <td><span class="red">C1</span></td>
+                    <td><span class="blue">C2</span></td>
+                    <td><span class="green">C3</span></td>
+                    <td><span class="magenta">C4</span></td>
+                </tr>                
+
+                <tr>
+                    <th>D</th>
+                    <td><span class="red">D1</span></td>
+                    <td><span class="blue">D2</span></td>
+                    <td><span class="green">D3</span></td>
+                    <td><span class="magenta">D4</span></td>
+                </tr>     
+
+                <tr>
+                    <th>E</th>
+                    <td><span class="red">E1</span></td>
+                    <td><span class="blue">E2</span></td>
+                    <td><span class="green">E3</span></td>
+                    <td><span class="magenta">E4</span></td>
+                </tr>     
+
+                <tr>
+                    <th>F</th>
+                    <td><span class="red">F1</span></td>
+                    <td><span class="blue">F2</span></td>
+                    <td><span class="green">F3</span></td>
+                    <td><span class="magenta">F4</span></td>
+                </tr>     
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <h2>Tabulka s přesahujícími buňkami</h2>
+        <table id="d2" class="default" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th>2</th>                    
+                    <th>3</th>                    
+                    <th>4</th>
+                </tr>
+     
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>A</th>
+                    <td colspan="2"><span class="red">A1-2</span></td>                    
+                    <td><span class="green">A3</span></td>
+                    <td><span class="magenta">A4</span></td>
+                </tr>
+
+                <tr>
+                    <th>B</th>
+                    <td colspan="3"><span class="red">B1-3</span></td>             
+                    <td><span class="magenta">B4</span></td>
+                </tr>
+
+                <tr>
+                    <th>C</th>
+                    <td><span class="red">C1</span></td>
+                    <td><span class="blue">C2</span></td>
+                    <td><span class="green">C3</span></td>
+                    <td><span class="magenta">C4</span></td>
+                </tr>                
+
+                <tr>
+                    <th>D</th>
+                    <td><span class="red">D1</span></td>
+                    <td><span class="blue">D2</span></td>
+                    <td><span class="green">D3</span></td>
+                    <td><span class="magenta">D4</span></td>
+                </tr>     
+
+                <tr>
+                    <th>E</th>
+                    <td><span class="red">E1</span></td>
+                    <td><span class="blue">E2</span></td>
+                    <td><span class="green">E3</span></td>
+                    <td><span class="magenta">E4</span></td>
+                </tr>     
+
+                <tr>
+                    <th>F</th>
+                    <td><span class="red">F1</span></td>
+                    <td><span class="blue">F2</span></td>
+                    <td><span class="green">F3</span></td>
+                    <td><span class="magenta">F4</span></td>
+                </tr>     
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <h2>Tabulka s přesahujícími buňkami včetně hlavičky</h2>
+        <table id="d3" class="default" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th colspan="2">2-3</th>                    
+                    <th>4</th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>A</th>
+                    <td colspan="2"><span class="red">A1-2</span></td>                    
+                    <td><span class="green">A3</span></td>
+                    <td><span class="magenta">A4</span></td>
+                </tr>
+
+                <tr>
+                    <th>B</th>
+                    <td colspan="3"><span class="red">B1-3</span></td>             
+                    <td><span class="magenta">B4</span></td>
+                </tr>
+
+                <tr>
+                    <th>C</th>
+                    <td><span class="red">C1</span></td>
+                    <td><span class="blue">C2</span></td>
+                    <td><span class="green">C3</span></td>
+                    <td><span class="magenta">C4</span></td>
+                </tr>                
+
+                <tr>
+                    <th>D</th>
+                    <td><span class="red">D1</span></td>
+                    <td colspan="2"><span class="blue">D2-3</span></td>                    
+                    <td><span class="magenta">D4</span></td>
+                </tr>     
+
+                <tr>
+                    <th>E</th>
+                    <td><span class="red">E1</span></td>
+                    <td><span class="blue">E2</span></td>
+                    <td colspan="2"><span class="green">E3-4</span></td>                    
+                </tr>     
+
+                <tr>
+                    <th>F</th>
+                    <td><span class="red">F1</span></td>
+                    <td><span class="blue">F2</span></td>
+                    <td><span class="green">F3</span></td>
+                    <td><span class="magenta">F4</span></td>
+                </tr>     
+            </tbody>
+
+        </table>
+        
+        <h3><a href="navod.html">NÁVOD</a></h3>
+        
+        <!-- linked lib -->
+        <script type="text/javascript" src="js/dynamicTable.js"></script>
+        <!-- linked activation script -->
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
